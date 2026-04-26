@@ -2,12 +2,14 @@
 CREATE TABLE "Animal" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "shortDescription" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "age" INTEGER NOT NULL,
-    "race" TEXT NOT NULL,
-    "specie" TEXT NOT NULL,
+    "years" INTEGER NOT NULL,
+    "months" INTEGER NOT NULL,
+    "sex" TEXT NOT NULL,
+    "status" TEXT NOT NULL,
+    "priority" TEXT NOT NULL, 
     "isAdopted" BOOLEAN NOT NULL,
-    "isAcogido" BOOLEAN NOT NULL,
 
     CONSTRAINT "Animal_pkey" PRIMARY KEY ("id")
 );

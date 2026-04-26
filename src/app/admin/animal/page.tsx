@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, Suspense} from "react";
 import type { Cat } from "@/database/catDB";
 import { cats } from "@/database/catDB";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -349,4 +349,10 @@ function Select({ label, options, ...props }: SelectProps) {
     );
 }
 
-export default EditAnimal;
+export default function Page() {
+    return (
+        <Suspense fallback={<div>Cargando...</div>}>
+            <EditAnimal/>
+        </Suspense>
+    )
+};

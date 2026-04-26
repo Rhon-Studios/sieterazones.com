@@ -8,20 +8,22 @@ datasource db {
 }
 
 model Animal {
-    id Int @id @default(autoincrement())
-    name String
-    description String
-    age Int
-    race String
-    specie String
-    isAdopted Boolean
-    isAcogido Boolean
-    images    ImagesAnimal[]
+  id               Int            @id @default(autoincrement())
+  name             String
+  shortDescription String
+  description      String
+  years            Int
+  months           Int
+  sex              String
+  status           String
+  priority         String
+  isAdopted        Boolean
+  images           ImagesAnimal[]
 }
 
 model ImagesAnimal {
-    id       Int    @id @default(autoincrement())
-    url      String
-    animalId Int
-    animal   Animal @relation(fields: [animalId], references: [id])
+  id       Int    @id @default(autoincrement())
+  url      String
+  animalId Int
+  animal   Animal @relation(fields: [animalId], references: [id])
 }
