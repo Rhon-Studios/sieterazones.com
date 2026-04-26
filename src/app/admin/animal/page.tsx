@@ -1,6 +1,6 @@
 "use client"
 
-import React, {ComponentProps, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import type { Cat } from "@/database/catDB";
 import { cats } from "@/database/catDB";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -8,14 +8,10 @@ import { motion } from "motion/react";
 import { Save, Upload } from "lucide-react";
 import Image from "next/image";
 
-type Props = {
-    onSaved?: () => void;
-};
-const EditAnimal = () => {
 
 type AnimalForm = Omit<Cat, "id"> & { id?: number };
 
-const EditAnimal = ({ onSaved, ...rest }: Props) => {
+const EditAnimal = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
@@ -351,4 +347,6 @@ function Select({ label, options, ...props }: SelectProps) {
             </select>
         </div>
     );
-}}
+}
+
+export default EditAnimal;
