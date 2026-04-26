@@ -20,7 +20,7 @@ export default function Home() {
     const [copied, setCopied] = useState(false);
 
     const handleShare = async () => {
-        const url = "https://tuweb.com";
+        const url = "https://sieterazones.vercel.app/";
 
         if (navigator.share) {
             try {
