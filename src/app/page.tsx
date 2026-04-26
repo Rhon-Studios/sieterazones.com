@@ -180,7 +180,7 @@ export default function Home() {
                             className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl"
                         >
                             <Image
-                                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&q=80"
+                                src="/aboutcat.jpg"
                                 alt="Voluntarios cuidando gatos"
                                 fill
                                 className="w-full h-full object-cover"
