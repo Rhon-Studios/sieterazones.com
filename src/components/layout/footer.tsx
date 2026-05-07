@@ -4,7 +4,7 @@ import React from "react";
 import Bar from "../ui/Bar";
 import { FaFacebook } from "react-icons/fa";
 import { TiSocialInstagram } from "react-icons/ti";
-import {Heart} from "lucide-react";
+import {Heart, Shield} from "lucide-react";
 
 const Footer = () => {
     return (
@@ -31,9 +31,18 @@ const Footer = () => {
                     </Bar>
                 </div>
                 <div className="mt-8 pt-6 border-t border-[#805BA6]/10 text-center">
-                    <p className="text-gray-600 text-sm flex items-center justify-center gap-2">
+                    <p className="text-gray-600 text-sm flex items-center justify-center gap-2 mb-6">
                         Hecho con <Heart className="w-4 h-4 text-[#805BA6] fill-[#805BA6]" /> para los gatitos de Jódar
                     </p>
+                    <div className="flex items-center justify-center gap-4 mb-3">
+                        <a
+                            href="/admin"
+                            className="text-xs text-gray-400 hover:text-[#805BA6] transition-colors inline-flex items-center gap-1"
+                        >
+                            <Shield className="w-3 h-3" />
+                            Panel de Administración
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>
