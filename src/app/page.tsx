@@ -65,8 +65,9 @@ export default function Home() {
   return (
     <div>
       <section
-        className="relative h-[90vh] min-h-[600px] overflow-hidden"
-        id="hero"
+          className="relative h-[90vh] overflow-hidden"
+          id="hero"
+          style={{ height: 'calc(100vh - 80px)' }}
       >
         <div className="absolute inset-0">
           <Image

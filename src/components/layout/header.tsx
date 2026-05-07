@@ -3,9 +3,10 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
-import {Cat, Home} from "lucide-react";
+import {Cat, ContactRound, Home} from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import {active} from "effect/src/internal/runtimeFlagsPatch";
 const Header= () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -18,6 +19,7 @@ const Header= () => {
     const Links = [
         { icon: <Home className="w-5 h-5" />, route: "/", label: "Home", active: isActive("/") },
         { icon: <Cat className="w-5 h-5" />, route: "/cats", label: "Adoptar", active: isActive("/cats") },
+        { icon: <ContactRound className="w-5 h-5"/>, route: "/nosotras", label: "Nosotras", active: isActive("/nosotras") },
     ];
     
     return (

@@ -39,12 +39,15 @@ const Login = () => {
     }
     
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#F6F1FB] via-[#E9E1F3] to-[#805BA6]/10 flex items-center justify-center px-6">
+        <div 
+            className="bg-gradient-to-br from-[#F6F1FB] via-[#E9E1F3] to-[#805BA6]/10 flex items-center justify-center px-6"
+            style={{ height: 'calc(100vh - 80px)' }}
+        >
             <motion.div 
                 initial={{ opacity: 0, y: 30 }} 
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ duration: 0.6 }} 
-                className="w-full max-w-md"
+                className="w-full max-w-md mb-25"
             >
                 <div className="text-center mb-8">
                     <motion.div
