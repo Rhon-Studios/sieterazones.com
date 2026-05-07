@@ -6,7 +6,6 @@ import { motion } from "motion/react";
 import {Cat, ContactRound, Home} from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import {active} from "effect/src/internal/runtimeFlagsPatch";
 const Header= () => {
     const router = useRouter();
     const pathname = usePathname();
