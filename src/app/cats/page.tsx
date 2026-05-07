@@ -20,6 +20,7 @@ const CatsPage = () => {
 
     const formattedCats = data.records.map(
       (cat: { id: string; fields: Cat }) => ({
+                id: cat.id,
         ...cat.fields,
       }),
     );

@@ -28,7 +28,10 @@ export default function Home() {
     const data = await res.json();
     if (!data?.records) return;
     const formattedCats = data.records.map(
-      (cat: { id: string; fields: Cat }) => ({ ...cat.fields }),
+      (cat: { id: string; fields: Cat }) => ({
+        id: cat.id,
+        ...cat.fields,
+      }),
     );
     setCats(formattedCats);
   };
