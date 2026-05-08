@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps } from "react";
+import React, {ComponentProps} from "react";
 import styled from "styled-components";
 
 type Props = ComponentProps<"div"> & { children?: React.ReactNode };
@@ -8,7 +8,7 @@ const Bar = ({children}: Props) => {
     return (
         <StyledWrapper>
             <div className="button-container">
-               {children}
+                {children}
             </div>
         </StyledWrapper>
     );

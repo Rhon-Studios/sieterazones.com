@@ -1,27 +1,27 @@
-﻿import type { Cat } from "@/database/catDB";
-import { motion } from "motion/react";
+﻿import type {Cat} from "@/database/catDB";
+import {motion} from "motion/react";
 import Image from "next/image";
-import {Calendar, CheckCircle, Edit, Euro, ExternalLink, Heart, Package, Speech} from "lucide-react";
+import {Calendar, CheckCircle, Edit, Euro, ExternalLink, Heart, Instagram, Package, Speech} from "lucide-react";
+import {useEffect, useRef, useState} from "react";
 
-
-export function CatCard({ cat }: { cat: Cat }) {
+export function CatCard({cat}: { cat: Cat }) {
     const priorityConfig = {
-        urgente: { label: "🔴 Urgente", color: "bg-red-500" },
-        alta: { label: "🟡 Prioridad Alta", color: "bg-yellow-500" },
-        normal: { label: "", color: "" }
+        urgente: {label: "🔴 Urgente", color: "bg-red-500"},
+        alta: {label: "🟡 Prioridad Alta", color: "bg-yellow-500"},
+        normal: {label: "", color: ""}
     };
 
     const statusConfig = {
-        normal: { label: "Disponible", color: "bg-emerald-500" },
-        reservado: { label: "Reservado", color: "bg-blue-500" },
-        acogido: { label: "En acogida", color: "bg-purple-500" }
+        normal: {label: "Disponible", color: "bg-emerald-500"},
+        reservado: {label: "Reservado", color: "bg-blue-500"},
+        acogido: {label: "En acogida", color: "bg-purple-500"}
     };
-    
+
     return (
         <a href={`/cats/${cat.id}`}>
             <motion.div
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{y: -8, scale: 1.02}}
+                transition={{duration: 0.3}}
                 className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all cursor-pointer"
             >
                 <div className="relative h-64 overflow-hidden">
@@ -33,7 +33,8 @@ export function CatCard({ cat }: { cat: Cat }) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"/>
                     {cat.priority !== "normal" && (
-                        <div className={`absolute top-3 right-3 ${priorityConfig[cat.priority].color} text-white text-xs font-bold px-3 py-1 rounded-full`}>
+                        <div
+                            className={`absolute top-3 right-3 ${priorityConfig[cat.priority].color} text-white text-xs font-bold px-3 py-1 rounded-full`}>
                             {priorityConfig[cat.priority].label}
                         </div>
                     )}
@@ -41,7 +42,7 @@ export function CatCard({ cat }: { cat: Cat }) {
                         <h3 className="text-2xl font-bold mb-1">{cat.name}</h3>
                         <div className="flex items-center gap-3 text-sm">
                             <span className="flex items-center gap-1">
-                                <Calendar className="w-4 h-4" />
+                                <Calendar className="w-4 h-4"/>
                                 {cat.years > 0 && `${cat.years} ${cat.years === 1 ? "año" : "años"}`}
                                 {cat.years > 0 && cat.months > 0 && " y "}
                                 {cat.months > 0 && `${cat.months} ${cat.months === 1 ? "mes" : "meses"}`}
@@ -57,7 +58,8 @@ export function CatCard({ cat }: { cat: Cat }) {
                         {cat.shortDescription}
                     </p>
                     <div className="flex items-center justify-between">
-                            <span className={`${statusConfig[cat.status].color} text-white text-xs font-medium px-3 py-1 rounded-full`}>
+                            <span
+                                className={`${statusConfig[cat.status].color} text-white text-xs font-medium px-3 py-1 rounded-full`}>
                                 {statusConfig[cat.status].label}
                             </span>
                         <span className="text-[#805BA6] font-medium group-hover:translate-x-2 transition-transform">
@@ -70,7 +72,7 @@ export function CatCard({ cat }: { cat: Cat }) {
     )
 }
 
-export function AdminCatCard({ cat, onEdit }: { cat: Cat; onEdit: () => void }) {
+export function AdminCatCard({cat, onEdit}: { cat: Cat; onEdit: () => void }) {
     const priorityColors = {
         urgente: "bg-red-500",
         alta: "bg-yellow-500",
@@ -88,12 +90,14 @@ export function AdminCatCard({ cat, onEdit }: { cat: Cat; onEdit: () => void }) 
                 />
                 <div className="absolute top-3 right-3 flex gap-2">
                     {cat.isAdopted ? (
-                        <span className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-              <CheckCircle className="w-3 h-3" />
+                        <span
+                            className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+              <CheckCircle className="w-3 h-3"/>
               Adoptado
             </span>
                     ) : (
-                        <span className={`${priorityColors[cat.priority]} text-white text-xs font-bold px-3 py-1 rounded-full`}>
+                        <span
+                            className={`${priorityColors[cat.priority]} text-white text-xs font-bold px-3 py-1 rounded-full`}>
                             {cat.priority === "urgente" ? "🔴 Urgente" : cat.priority === "alta" ? "🟡 Alta" : "🟢 Normal"}
                         </span>
                     )}
@@ -104,7 +108,7 @@ export function AdminCatCard({ cat, onEdit }: { cat: Cat; onEdit: () => void }) 
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{cat.name}</h3>
                 <div className="flex items-center gap-3 text-sm text-gray-600 mb-3">
                     <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-4 h-4"/>
                         {cat.years > 0 && `${cat.years} ${cat.years === 1 ? "año" : "años"}`}
                         {cat.years > 0 && cat.months > 0 && " y "}
                         {cat.months > 0 && `${cat.months} ${cat.months === 1 ? "mes" : "meses"}`}
@@ -119,11 +123,11 @@ export function AdminCatCard({ cat, onEdit }: { cat: Cat; onEdit: () => void }) 
 
                 <motion.button
                     onClick={onEdit}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{scale: 1.02}}
+                    whileTap={{scale: 0.98}}
                     className="w-full flex items-center justify-center gap-2 bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-4 py-3 rounded-xl font-semibold transition-all"
                 >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-4 h-4"/>
                     Editar
                 </motion.button>
             </div>
@@ -132,11 +136,12 @@ export function AdminCatCard({ cat, onEdit }: { cat: Cat; onEdit: () => void }) 
 }
 
 type StatCardProps = {
-    icon: React.ReactNode; 
-    value: string, 
+    icon: React.ReactNode;
+    value: string,
     label: string
 }
-export function StatCard({ icon, value, label }: StatCardProps) {
+
+export function StatCard({icon, value, label}: StatCardProps) {
     return (
         <div className="bg-[#E9E1F3] rounded-xl p-6 text-center">
             <div className="flex justify-center mb-2 text-[#6A4A8A]">{icon}</div>
@@ -145,12 +150,14 @@ export function StatCard({ icon, value, label }: StatCardProps) {
         </div>
     );
 }
+
 type AdminStatCardProps = {
     color: string;
     value: number,
     label: string
 }
-export function AdminStatCard({ color, value, label }: AdminStatCardProps) {
+
+export function AdminStatCard({color, value, label}: AdminStatCardProps) {
     return (
         <div className={`${color} text-white rounded-2xl p-6 shadow-lg`}>
             <p className="text-sm opacity-90 mb-1">{label}</p>
@@ -167,22 +174,23 @@ type DonationCardProps = {
     link?: string;
     onClick?: () => void;
 };
-export function DonationCard({ type, title, description, action, link, onClick }: DonationCardProps ) {
+
+export function DonationCard({type, title, description, action, link, onClick}: DonationCardProps) {
     const icons = {
-        bizum: <Heart className="w-8 h-8 text-[#805BA6]" />,
-        teaming: <Euro className="w-8 h-8 text-[#805BA6]" />,
+        bizum: <Heart className="w-8 h-8 text-[#805BA6]"/>,
+        teaming: <Euro className="w-8 h-8 text-[#805BA6]"/>,
         material: <Package className="w-8 h-8 text-[#805BA6]"/>,
-        share: <Speech className="w-8 h-8 text-[#805BA6]" />
+        share: <Speech className="w-8 h-8 text-[#805BA6]"/>
     }
     const isClickable = link || onClick;
     const content = (
         <motion.div
-            whileHover={{ scale: isClickable ? 1.03 : 1, y: isClickable ? -4 : 0 }}
+            whileHover={{scale: isClickable ? 1.03 : 1, y: isClickable ? -4 : 0}}
             onClick={onClick}
             className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all 
             ${isClickable ? 'cursor-pointer' : ''} 
             ${type === 'material' ? 'md:col-span-2' : ''}`}
-            
+
         >
             <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-[#E9E1F3] rounded-full flex items-center justify-center flex-shrink-0">
@@ -195,7 +203,7 @@ export function DonationCard({ type, title, description, action, link, onClick }
                         <span>
                             {action}
                         </span>
-                        {(link || onClick) && <ExternalLink className="w-4 h-4" />}
+                        {(link || onClick) && <ExternalLink className="w-4 h-4"/>}
                     </div>
                 </div>
             </div>
@@ -212,26 +220,28 @@ export function DonationCard({ type, title, description, action, link, onClick }
 }
 
 type ContactCardProps = {
-    icon: React.ReactNode; 
-    title: string, 
-    content: string, 
-    link: string, 
+    icon: React.ReactNode;
+    title: string,
+    content: string,
+    link: string,
     delay: number
 };
-export function ContactCard({ icon, title, content, link, delay }: ContactCardProps ) {
-    return(
+
+export function ContactCard({icon, title, content, link, delay}: ContactCardProps) {
+    return (
         <motion.a
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay, duration: 0.6 }}
-            whileHover={{ y: -8, scale: 1.03 }}
+            initial={{opacity: 0, y: 30}}
+            whileInView={{opacity: 1, y: 0}}
+            viewport={{once: true}}
+            transition={{delay, duration: 0.6}}
+            whileHover={{y: -8, scale: 1.03}}
             className="bg-white rounded-xl p-6 shadow-md hover:shadow-2xl text-center transition-all border border-gray-100"
         >
-            <div className="bg-[#E9E1F3] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-[#6A4A8A]">
+            <div
+                className="bg-[#E9E1F3] w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 text-[#6A4A8A]">
                 {icon}
             </div>
             <h3 className="text-black text-lg font-semibold mb-2">
@@ -243,22 +253,25 @@ export function ContactCard({ icon, title, content, link, delay }: ContactCardPr
         </motion.a>
     );
 }
+
 type ProcessStepCardProps = {
-    number: string; 
-    title: string; 
+    number: string;
+    title: string;
     description: string
 };
-export function ProcessStepCard({ number, title, description }: ProcessStepCardProps ) {
+
+export function ProcessStepCard({number, title, description}: ProcessStepCardProps) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            whileHover={{ y: -8, scale: 1.03 }}
+            initial={{opacity: 0, y: 30}}
+            whileInView={{opacity: 1, y: 0}}
+            viewport={{once: true}}
+            transition={{duration: 0.6}}
+            whileHover={{y: -8, scale: 1.03}}
             className="bg-[#F6F1FB] rounded-2xl p-8 text-center"
         >
-            <div className="bg-gradient-to-br from-[#805BA6] to-[#6A4A8A] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <div
+                className="bg-gradient-to-br from-[#805BA6] to-[#6A4A8A] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <span className="text-3xl font-bold text-white">
                     {number}
                 </span>
@@ -271,4 +284,52 @@ export function ProcessStepCard({ number, title, description }: ProcessStepCardP
             </p>
         </motion.div>
     )
+}
+
+interface InstagramCardProps {
+    url: string;
+    delay?: number;
+    caption: string;
+    imageUrl: string;
+}
+
+export function InstagramCard({url, delay = 0, caption, imageUrl}: InstagramCardProps) {
+    return (
+        <motion.a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay, duration: 0.6 }}
+            className="group block bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+        >
+            <div className="relative aspect-square overflow-hidden bg-gray-100">
+                <img
+                    src={imageUrl}
+                    alt={caption}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full">
+                    <Instagram className="w-5 h-5 text-pink-600" />
+                </div>
+            </div>
+            <div className="p-4">
+                <p className="text-gray-700 line-clamp-2">{caption}</p>
+                <div className="mt-2 flex items-center gap-2 text-pink-600 group-hover:gap-3 transition-all">
+                    <span className="text-sm">Ver en Instagram</span>
+                    <svg
+                        className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </div>
+        </motion.a>
+    );
 }

@@ -5,7 +5,7 @@
     options: { value: string; label: string }[];
 };
 
-export function FilterSelect({ label, value, onChange, options }: FilterProps) {
+export function FilterSelect({label, value, onChange, options}: FilterProps) {
     return (
         <div>
             <label className="block text-sm font-semibold mb-2 text-gray-700">

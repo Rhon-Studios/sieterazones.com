@@ -21,7 +21,7 @@ export const cats: Cat[] = [
         months: 6,
         sex: "hembra",
         status: "normal",
-        images: [{ url: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&q=8" }],
+        images: [{url: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&q=8"}],
         priority: "normal",
         isAdopted: false
     },
@@ -33,7 +33,7 @@ export const cats: Cat[] = [
         months: 12,
         sex: "macho",
         status: "normal",
-        images: [{ url: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&q=80" }],
+        images: [{url: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&q=80"}],
         priority: "alta",
         isAdopted: false
     },
@@ -45,7 +45,7 @@ export const cats: Cat[] = [
         months: 6,
         sex: "hembra",
         status: "reservado",
-        images: [{ url: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80" }],
+        images: [{url: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80"}],
         priority: "urgente",
         isAdopted: false
     },
@@ -57,7 +57,7 @@ export const cats: Cat[] = [
         months: 12,
         sex: "macho",
         status: "acogido",
-        images: [{ url: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=800&q=80" }],
+        images: [{url: "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?w=800&q=80"}],
         priority: "normal",
         isAdopted: false
     },
@@ -69,7 +69,7 @@ export const cats: Cat[] = [
         months: 12,
         sex: "hembra",
         status: "normal",
-        images: [{ url: "https://images.unsplash.com/photo-1615789591457-74a63395c990?w=800&q=80" }],
+        images: [{url: "https://images.unsplash.com/photo-1615789591457-74a63395c990?w=800&q=80"}],
         priority: "alta",
         isAdopted: false
     },
@@ -81,7 +81,7 @@ export const cats: Cat[] = [
         months: 12,
         sex: "macho",
         status: "normal",
-        images: [{ url: "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=800&q=80" }],
+        images: [{url: "https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=800&q=80"}],
         priority: "normal",
         isAdopted: true
     }

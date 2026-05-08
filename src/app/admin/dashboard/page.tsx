@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import type { Cat } from "@/database/catDB";
-import { motion } from "motion/react";
-import { LogOut, Plus, Search } from "lucide-react";
-import { AdminCatCard, AdminStatCard } from "@/components/ui/Cards";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/navigation";
+import type {Cat} from "@/database/catDB";
+import {motion} from "motion/react";
+import {LogOut, Plus, Search} from "lucide-react";
+import {AdminCatCard, AdminStatCard} from "@/components/ui/Cards";
 
 type AirtableCat = Cat & {
     airtableId: string;
@@ -47,9 +47,9 @@ const AdminDashboardPage = () => {
         <div className="min-h-screen bg-[#F6F1FB] py-8 px-6">
             <div className="max-w-7xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
+                    initial={{opacity: 0, y: -20}}
+                    animate={{opacity: 1, y: 0}}
+                    transition={{duration: 0.6}}
                     className="mb-8"
                 >
                     <div className="flex justify-between items-center mb-6">
@@ -65,11 +65,11 @@ const AdminDashboardPage = () => {
 
                         <motion.a
                             href="/"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{scale: 1.05}}
+                            whileTap={{scale: 0.95}}
                             className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition-all"
                         >
-                            <LogOut className="w-5 h-5" />
+                            <LogOut className="w-5 h-5"/>
                             Salir
                         </motion.a>
                     </div>
@@ -100,9 +100,10 @@ const AdminDashboardPage = () => {
                         />
                     </div>
 
-                    <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div
+                        className="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row gap-4 items-center justify-between">
                         <div className="relative flex-1 w-full">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"/>
 
                             <input
                                 type="text"
@@ -115,11 +116,11 @@ const AdminDashboardPage = () => {
 
                         <motion.button
                             onClick={goToNewAnimal}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{scale: 1.05}}
+                            whileTap={{scale: 0.95}}
                             className="flex items-center gap-2 bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] text-white px-6 py-3 rounded-xl font-semibold shadow-lg whitespace-nowrap"
                         >
-                            <Plus className="w-5 h-5" />
+                            <Plus className="w-5 h-5"/>
                             Añadir Gato
                         </motion.button>
                     </div>
@@ -136,9 +137,9 @@ const AdminDashboardPage = () => {
                         {filteredCats.map((cat, index) => (
                             <motion.div
                                 key={cat.airtableId}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05, duration: 0.6 }}
+                                initial={{opacity: 0, y: 30}}
+                                animate={{opacity: 1, y: 0}}
+                                transition={{delay: index * 0.05, duration: 0.6}}
                             >
                                 <AdminCatCard
                                     cat={cat}

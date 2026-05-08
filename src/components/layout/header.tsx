@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
+import {usePathname, useRouter} from "next/navigation";
+import {motion} from "motion/react";
 import {Cat, ContactRound, Home} from "lucide-react";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
-const Header= () => {
+
+const Header = () => {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -16,16 +16,15 @@ const Header= () => {
     };
 
     const Links = [
-        { icon: <Home className="w-5 h-5" />, route: "/", label: "Home", active: isActive("/") },
-        { icon: <Cat className="w-5 h-5" />, route: "/cats", label: "Adoptar", active: isActive("/cats") },
-        { icon: <ContactRound className="w-5 h-5"/>, route: "/nosotras", label: "Nosotras", active: isActive("/nosotras") },
+        {icon: <Home className="w-5 h-5"/>, route: "/", label: "Home", active: isActive("/")},
+        {icon: <Cat className="w-5 h-5"/>, route: "/cats", label: "Adoptar", active: isActive("/cats")},
     ];
-    
+
     return (
         <motion.header
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            initial={{y: -100}}
+            animate={{y: 0}}
+            transition={{duration: 0.6, ease: [0.22, 1, 0.36, 1]}}
             className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-[#805BA6]/10 shadow-sm"
         >
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -37,7 +36,7 @@ const Header= () => {
                         className="flex items-center cursor-pointer"
                         onClick={() => router.push("/")}
                     >
-                        <Image 
+                        <Image
                             src="/logo-bgremove.png"
                             alt="7 Razones"
                             width={48}
@@ -56,15 +55,17 @@ const Header= () => {
                 <nav className="flex gap-2">
                     {Links.map((link) => (
                         <motion.button
-                            onClick={() => {router.push(link.route)}}
+                            onClick={() => {
+                                router.push(link.route)
+                            }}
                             key={link.label}
                             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                                 link.active
                                     ? "bg-[#805BA6] text-white"
                                     : "bg-transparent text-gray-700 hover:bg-[#E9E1F3]"
                             }`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{scale: 1.05}}
+                            whileTap={{scale: 0.95}}
                         >
                             {link.icon}
                             <span className="font-medium">{link.label}</span>
@@ -75,7 +76,6 @@ const Header= () => {
         </motion.header>
     );
 };
-
 
 
 export default Header;
