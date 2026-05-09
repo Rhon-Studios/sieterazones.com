@@ -257,7 +257,7 @@ export default function Home() {
                             url="https://www.instagram.com/p/DXhglS5CMwa/"
                             delay={0.1} 
                             caption={"Gracias a vuestras donaciones nuestros gatetes pueden jugar con sus nuevos rascadores, gracias siempre 🙏🏻 Toda ayuda es poca y más en la temporada de nacimientos que estamos 🐈🐈‍⬛🍼#adoptanocompres #gatos #gatitos #salvaunavida #donating"}                            
-                            imageUrl={"/instagramPost1.png"}
+                            imageUrl={"/InstagramPost1.png"}
                         />
                         <InstagramCard
                             url="https://www.instagram.com/p/DXhglS5CMwa/"
