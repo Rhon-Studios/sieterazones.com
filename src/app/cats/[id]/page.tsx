@@ -15,7 +15,7 @@ const CatPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchCat = async () => {
-        const res = await fetch("/api/cats?id=${id}");
+        const res = await fetch(`/api/cats?id=${id}`);
         const data = await res.json();
         setIsLoading(false);
         if (!data || !data.fields) {

@@ -6,7 +6,6 @@ import type {Cat} from "@/database/catDB";
 import {motion} from "motion/react";
 import {LogOut, Plus, Search} from "lucide-react";
 import {AdminCatCard, AdminStatCard, AdoptedCatCard} from "@/components/ui/Cards";
-import {ALL} from "node:dns";
 
 type AirtableCat = Cat & {
     airtableId: string;
@@ -178,7 +177,7 @@ const AdminDashboardPage = () => {
                 </motion.div>
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        🐱 En adopción
+                        Gatos en Adopción
                         <span className="text-base font-normal text-gray-400">({filteredAvailable.length})</span>
                     </h2>
                     {filteredAvailable.length === 0 ? (
@@ -204,9 +203,9 @@ const AdminDashboardPage = () => {
                     )}
                 </div>
                 <div>
-                    <div className="w-full border-1 border-gray-400 mb-10"/>
+                    <div className="w-full border border-gray-400 mb-10"/>
                     <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        Adoptados
+                        Gatos Adoptados
                         <span className="text-base font-normal text-gray-400">({filteredAdopted.length})</span>
                     </h2>
 

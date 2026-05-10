@@ -200,13 +200,13 @@ export default function Home() {
 
                                 <p>
                                     Todo este trabajo es posible gracias a las
-                                    donaciones, la colaboración de personas comprometidas y el apoyo del
-                                    voluntariado, fundamental para poder seguir ayudando a más gatos cada
-                                    día.
+                                    donaciones, las donaciones, la colaboración de personas comprometidas y 
+                                    el apoyo del voluntariado, que es fundamental para poder seguir ayudando 
+                                    a más gatos cada día.
                                 </p>
                                 <a href={"#contact"}>
-                                    ¿Te gustaría colaborar con nosotros?
-                                    <strong className="text-[#6A4A8A]"> ¡Contactanos!</strong>
+                                    ¿Te gustaría colaborar con nosotros? 
+                                    <strong className="text-[#6A4A8A]"> ¡Contáctanos! </strong>
                                 </a>
                             </div>
                             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -289,7 +289,7 @@ export default function Home() {
                             href={"https://www.instagram.com/asociacionfelinosprotegidos/"}
                             className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-base sm:text-lg"
                         >
-                            ¡Siguenos en Instagram!
+                            ¡Síguenos en Instagram!
                         </a>
                     </div>
                 </div>
