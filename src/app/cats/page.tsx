@@ -54,13 +54,13 @@ const CatsPage = () => {
                     initial={{opacity: 0, y: 30}}
                     animate={{opacity: 1, y: 0}}
                     transition={{duration: 0.6}}
-                    className="text-center mb-12"
+                    className="text-center mb-10 sm:mb-12 px-4"
                 >
-                    <h1 className="text-6xl font-bold text-gray-800 mb-4">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-3 sm:mb-4 leading-tight">
                         Gatos en Adopción
                     </h1>
 
-                    <p className="text-xl text-gray-600">
+                    <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                         Conoce a todos nuestros felinos que buscan un hogar lleno de amor
                     </p>
                 </motion.div>
@@ -170,7 +170,7 @@ const CatsPage = () => {
                         href="https://docs.google.com/forms/d/137J_fztI0y11rra4NhO9tvJ4nya14dUhJ6sNMO3F9og/edit"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-10 py-5 rounded-xl transition-all hover:scale-105 shadow-lg font-semibold text-lg"
+                        className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-base sm:text-lg"
                     >
                         Solicitar Adopción
                     </a>

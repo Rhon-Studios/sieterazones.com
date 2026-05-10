@@ -81,7 +81,7 @@ const CatPage = () => {
                                 initial={{opacity: 0, scale: 0.95}}
                                 animate={{opacity: 1, scale: 1}}
                                 transition={{delay: 0.2, duration: 0.6}}
-                                className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+                                className="relative w-full h-[320px] sm:h-[420px] lg:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-white"
                             >
                                 <Image
                                     src={cat?.images?.[0]?.url ?? ""}

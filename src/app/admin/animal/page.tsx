@@ -162,16 +162,12 @@ const EditAnimal = () => {
                     </a>
 
                     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] px-8 py-6">
-                            <h2 className="text-3xl font-bold text-white">
-                                {isNew ? "Añade un nuevo gato al sistema" : "Actualiza la información del gato"}
-                            </h2>
-
-                            <p className="text-[#E9E1F3] mt-2">
+                        <div className="bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+                            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-snug">
                                 {isNew
                                     ? "Añade un nuevo gato al sistema"
                                     : "Actualiza la información del gato"}
-                            </p>
+                            </h2>
                         </div>
 
                         <form onSubmit={handleSubmit} className="p-8 space-y-8">
@@ -339,12 +335,12 @@ const EditAnimal = () => {
                                     )}
                             </Section>
 
-                            <div className="flex gap-4 pt-6 border-t border-gray-200">
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-5 sm:pt-6 border-t border-gray-200">
                                 <motion.a
                                     href="/admin/dashboard"
                                     whileHover={{scale: 1.02}}
                                     whileTap={{scale: 0.98}}
-                                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-4 rounded-xl font-semibold transition-all text-center"
+                                    className="w-full sm:flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-semibold transition-all text-center"
                                 >
                                     Cancelar
                                 </motion.a>
@@ -355,12 +351,11 @@ const EditAnimal = () => {
                                         disabled={isDeleting}
                                         whileHover={{scale: 1.02}}
                                         whileTap={{scale: 0.98}}
-                                        className="flex-1 bg-red-500 hover:bg-red-600 text-white px-6 py-4 rounded-xl font-semibold shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                                        className="w-full sm:flex-1 bg-red-500 hover:bg-red-600 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-semibold shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2"
                                     >
                                         {isDeleting ? (
                                             <>
-                                                <div
-                                                    className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"/>
+                                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                                                 Eliminando...
                                             </>
                                         ) : (
@@ -376,12 +371,11 @@ const EditAnimal = () => {
                                     disabled={isSaving}
                                     whileHover={{scale: 1.02}}
                                     whileTap={{scale: 0.98}}
-                                    className="flex-1 bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] text-white px-6 py-4 rounded-xl font-semibold shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                                    className="w-full sm:flex-1 bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-semibold shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2"
                                 >
                                     {isSaving ? (
                                         <>
-                                            <div
-                                                className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"/>
+                                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                                             Guardando...
                                         </>
                                     ) : (

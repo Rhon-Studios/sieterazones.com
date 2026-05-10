@@ -55,7 +55,7 @@ export default function Home() {
     return (
         <div>
             <section
-                className="relative h-[90vh] overflow-hidden"
+                className="relative overflow-hidden"
                 id="hero"
                 style={{height: 'calc(100vh - 80px)'}}
             >
@@ -66,73 +66,77 @@ export default function Home() {
                         fill
                         className="object-cover object-[70%_10%]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"/>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 md:to-transparent"/>
                 </div>
-                <div className="relative h-full max-w-7xl mx-auto px-6 flex items-center">
-                    <motion.div
-                        initial={{opacity: 0, x: -50}}
-                        animate={{opacity: 1, x: 0}}
-                        transition={{duration: 0.8, ease: [0.22, 1, 0.36, 1]}}
-                        className="max-w-2xl text-white"
-                    >
-                        <motion.h2
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{delay: 0.2, duration: 0.8}}
-                            className="text-6xl font-bold mb-6 leading-tight"
-                        >
-                            Dale un hogar a un felino necesitado
-                        </motion.h2>
-                        <motion.p
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{delay: 0.4, duration: 0.8}}
-                            className="text-xl mb-8 text-gray-100"
-                        >
-                            En Jódar, Jaén trabajamos cada día para rescatar, cuidar y
-                            encontrar familias para gatos abandonados.
-                        </motion.p>
+                <div className="relative z-10 flex items-center min-h-[calc(100vh-80px)]">
+                    <div className="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12">
                         <motion.div
-                            initial={{opacity: 0, y: 20}}
-                            animate={{opacity: 1, y: 0}}
-                            transition={{delay: 0.6, duration: 0.8}}
-                            className="flex gap-4"
+                            initial={{opacity: 0, x: -50}}
+                            animate={{opacity: 1, x: 0}}
+                            transition={{duration: 0.8, ease: [0.22, 1, 0.36, 1]}}
+                            className="max-w-2xl text-white py-16 md:py-0"
                         >
-                            <button
-                                onClick={() => {
-                                    router.push("/cats");
-                                }}
-                                className="bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-8 py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold"
+                            <motion.h2
+                                initial={{opacity: 0, y: 20}}
+                                animate={{opacity: 1, y: 0}}
+                                transition={{delay: 0.2, duration: 0.8}}
+                                className="font-bold leading-tight mb-6 text-4xl sm:text-5xl lg:text-6xl"
                             >
-                                Ver gatos en adopción
-                            </button>
-                            <a
-                                href="#donations"
-                                className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-8 py-4 rounded-lg border-2 border-white transition-all hover:scale-105 font-semibold"
+                                Dale un hogar a un felino necesitado
+                            </motion.h2>
+                            <motion.p
+                                initial={{opacity: 0, y: 20}}
+                                animate={{opacity: 1, y: 0}}
+                                transition={{delay: 0.4, duration: 0.8}}
+                                className="text-base sm:text-lg lg:text-xl text-gray-100 mb-8 max-w-xl"
                             >
-                                Ayúdanos
-                            </a>
+                                En Jódar, Jaén trabajamos cada día para rescatar, cuidar y
+                                encontrar familias para gatos abandonados.
+                            </motion.p>
+                            <motion.div
+                                initial={{opacity: 0, y: 20}}
+                                animate={{opacity: 1, y: 0}}
+                                transition={{delay: 0.6, duration: 0.8}}
+                                className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto text-center"
+                            >
+                                <button
+                                    onClick={() => {
+                                        router.push("/cats");
+                                    }}
+                                    className="bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-8 py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold w-full sm:w-auto"
+                                >
+                                    Ver gatos en adopción
+                                </button>
+                                <a
+                                    href="#donations"
+                                    className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-8 py-4 rounded-lg border-2 border-white transition-all hover:scale-105 font-semibold w-full sm:w-auto"
+                                >
+                                    Ayúdanos
+                                </a>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
-            <section className="py-20 px-6 bg-[#F6F1FB]" id="homecats">
+            <section className="py-16 sm:py-20 px-4 sm:px-6 bg-[#F6F1FB]"
+                     id="homecats"
+            >
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         initial={{opacity: 0, y: 30}}
                         whileInView={{opacity: 1, y: 0}}
                         viewport={{once: true}}
                         transition={{duration: 0.6}}
-                        className="text-center mb-12"
+                        className="text-center mb-10 sm:mb-12"
                     >
-                        <h2 className="text-5xl font-bold text-gray-800 mb-4">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                             Nuestros gatos
                         </h2>
-                        <p className="text-xl text-gray-600">
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
                             Conoce a algunos de nuestros felinos en busca de un hogar
                         </p>
                     </motion.div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                         {featuredCats.map((cat, index) => (
                             <motion.div
                                 key={cat.id}
@@ -150,26 +154,29 @@ export default function Home() {
                             onClick={() => {
                                 router.push("/cats");
                             }}
-                            className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-8 py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-lg"
+                            className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-base sm:text-lg"
                         >
                             Ver gatos en adopción
                         </button>
                     </div>
                 </div>
             </section>
-            <section className="py-20 px-6 bg-white" id="about">
+            <section 
+                className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-white" 
+                id="about"
+            >
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid gridd-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                         <motion.div
                             initial={{opacity: 0, x: -30}}
                             whileInView={{opacity: 1, x: 0}}
                             viewport={{once: true}}
                             transition={{duration: 0.6}}
                         >
-                            <h2 className="text-5xl font-bold text-gray-800 mb-6">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-6 text-center lg:text-left">
                                 Sobre nosotras
                             </h2>
-                            <div className="space-y-4 text-gray-600 text-lg leading-relaxed text-justify">
+                            <div className="space-y-4 text-gray-600 text-base sm:text-lg leading-relaxed text-justify">
                                 <p>
                                     La{" "}
                                     <strong className="text-[#6A4A8A]">
@@ -202,7 +209,7 @@ export default function Home() {
                                     <strong className="text-[#6A4A8A]"> ¡Contactanos!</strong>
                                 </a>
                             </div>
-                            <div className="mt-8 grid grid-cols-3 gap-4">
+                            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <StatCard
                                     icon={<Users className="w-6 h-6"/>}
                                     value="+50"
@@ -248,16 +255,16 @@ export default function Home() {
                         whileInView={{opacity: 1, y: 0}}
                         viewport={{once: true}}
                         transition={{duration: 0.6}}
-                        className="text-center mb-12"
+                        className="text-center mb-10 sm:mb-12"
                     >
-                        <h2 className="text-5xl font-bold text-gray-800 mb-4">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                             Su Refugio
                         </h2>
-                        <p className="text-xl text-gray-600">
-                            Conoce dónde viven nuestros gatos
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
+                            Conoce donde viven nuestros gatos
                         </p>
                     </motion.div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10 lg:mb-12">
                         <InstagramCard
                             url="https://www.instagram.com/p/DXhglS5CMwa/"
                             delay={0.1} 
@@ -280,7 +287,7 @@ export default function Home() {
                     <div className="text-center">
                         <a
                             href={"https://www.instagram.com/asociacionfelinosprotegidos/"}
-                            className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-8 py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-lg"
+                            className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-base sm:text-lg"
                         >
                             ¡Siguenos en Instagram!
                         </a>
@@ -294,14 +301,13 @@ export default function Home() {
                         whileInView={{opacity: 1, y: 0}}
                         viewport={{once: true}}
                         transition={{duration: 0.6}}
-                        className="text-center mb-12"
+                        className="text-center mb-10 sm:mb-12"
                     >
-                        <h2 className="text-5xl font-bold text-gray-800 mb-4">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                             Cómo Ayudar
                         </h2>
-                        <p className="text-xl text-gray-600">
-                            Tu apoyo es fundamental para seguir rescatando y cuidando a
-                            nuestros felinos
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
+                            Tu apoyo es fundamental para seguir rescatando y cuidando a nuestros felinos
                         </p>
                     </motion.div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -370,10 +376,12 @@ export default function Home() {
                         whileInView={{opacity: 1, y: 0}}
                         viewport={{once: true}}
                         transition={{duration: 0.6}}
-                        className="text-center mb-12"
+                        className="text-center mb-10 sm:mb-12"
                     >
-                        <h2 className="text-5xl font-bold text-gray-800 mb-4">Contacto</h2>
-                        <p className="text-xl text-gray-600">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                            Contacto
+                        </h2>
+                        <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
                             ¿Tienes preguntas? Estamos aquí para ayudarte
                         </p>
                     </motion.div>
