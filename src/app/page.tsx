@@ -13,7 +13,7 @@ export default function Home() {
     const [copied, setCopied] = useState(false);
         
     const fetchCats = async () => {
-        const res = await fetch("http://localhost:3000/api/cats");
+        const res = await fetch("/api/cats");
         const data = await res.json();
         if (!data?.records) return;
         const formattedCats = data.records.map(
