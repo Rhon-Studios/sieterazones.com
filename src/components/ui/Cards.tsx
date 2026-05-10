@@ -355,6 +355,17 @@ export function InstagramCard({url, delay = 0, caption, imageUrl}: InstagramCard
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full">
                     <Instagram className="w-5 h-5 text-pink-600" />
                 </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-black/40 backdrop-blur-sm p-4 rounded-full group-hover:scale-110 transition-transform">
+                        <svg
+                            className="w-10 h-10 text-white"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
             </div>
             <div className="p-4">
                 <p className="text-gray-700 line-clamp-2">
@@ -370,7 +381,12 @@ export function InstagramCard({url, delay = 0, caption, imageUrl}: InstagramCard
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                     >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <path 
+                            strokeLinecap="round" 
+                            strokeLinejoin="round" 
+                            strokeWidth={2} 
+                            d="M9 5l7 7-7 7" 
+                        />
                     </svg>
                 </div>
             </div>
