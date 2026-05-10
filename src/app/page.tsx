@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
 import {motion} from "motion/react";
@@ -11,6 +11,7 @@ export default function Home() {
     const router = useRouter();
     const [cats, setCats] = useState<Cat[]>([]);
     const [copied, setCopied] = useState(false);
+        
     const fetchCats = async () => {
         const res = await fetch("http://localhost:3000/api/cats");
         const data = await res.json();
@@ -50,6 +51,7 @@ export default function Home() {
             setTimeout(() => setCopied(false), 2000);
         }
     };
+        
     return (
         <div>
             <section
@@ -196,7 +198,8 @@ export default function Home() {
                                     día.
                                 </p>
                                 <a href={"#contact"}>
-                                    
+                                    ¿Te gustaría colaborar con nosotros?
+                                    <strong className="text-[#6A4A8A]"> ¡Contactanos!</strong>
                                 </a>
                             </div>
                             <div className="mt-8 grid grid-cols-3 gap-4">
@@ -217,22 +220,24 @@ export default function Home() {
                                 />
                             </div>
                         </motion.div>
-                        <div className="justify-center items-center">
-                            <motion.div
-                                initial={{opacity: 0, x: 30}}
-                                whileInView={{opacity: 1, x: 0}}
-                                viewport={{once: true}}
-                                transition={{duration: 0.6}}
-                                className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl"
-                            >
-                                <Image
-                                    src="/logo.jpg"
-                                    alt="Voluntarios cuidando gatos"
-                                    fill
-                                    className="w-full h-full object-cover"
-                                />
-                            </motion.div>
-                        </div>
+                        <motion.div
+                            initial={{opacity: 0, x: 30}}
+                            whileInView={{opacity: 1, x: 0}}
+                            viewport={{once: true}}
+                            transition={{duration: 0.6}}
+                            className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <div>
+                                <div className="bg-white rounded-2xl overflow-hidden shadow-xl mb-6">
+                                    <Image
+                                        src="/logo.jpg"
+                                        alt={`Asociación Felinos Protegidos - 7 Razones`}
+                                        fill
+                                        className="w-full h-full object-cover object-[center_-20px]"
+                                    />
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -257,20 +262,28 @@ export default function Home() {
                             url="https://www.instagram.com/p/DXhglS5CMwa/"
                             delay={0.1} 
                             caption={"Gracias a vuestras donaciones nuestros gatetes pueden jugar con sus nuevos rascadores, gracias siempre 🙏🏻 Toda ayuda es poca y más en la temporada de nacimientos que estamos 🐈🐈‍⬛🍼#adoptanocompres #gatos #gatitos #salvaunavida #donating"}                            
-                            imageUrl={"/InstagramPost1.png"}
+                            imageUrl={"/post_one.png"}
                         />
                         <InstagramCard
-                            url="https://www.instagram.com/p/DXhglS5CMwa/"
+                            url="https://www.instagram.com/p/DMkNg6js0NM/"
                             delay={0.1}
-                            caption={"Gracias a vuestras donaciones nuestros gatetes pueden jugar con sus nuevos rascadores, gracias siempre 🙏🏻 Toda ayuda es poca y más en la temporada de nacimientos que estamos 🐈🐈‍⬛🍼#adoptanocompres #gatos #gatitos #salvaunavida #donating"}
-                            imageUrl=""
+                            caption={"Estos mini michis buscan una casa de acogida y salir de ahí que hace tantísima calor debajo de esas chapas. O una adopción definitiva y que por fin puedan tener una familia 🆘️🆘️🆘️🏡🆘️🆘️🆘️ #adoptagatos #adoptdontshop #acogida"}
+                            imageUrl="/post_two.png"
                         />
                         <InstagramCard
-                            url="https://www.instagram.com/p/DXhglS5CMwa/"
+                            url="https://www.instagram.com/p/DX48pXSiMaG/?img_index=1"
                             delay={0.1}
-                            caption={"Gracias a vuestras donaciones nuestros gatetes pueden jugar con sus nuevos rascadores, gracias siempre 🙏🏻 Toda ayuda es poca y más en la temporada de nacimientos que estamos 🐈🐈‍⬛🍼#adoptanocompres #gatos #gatitos #salvaunavida #donating"}
-                            imageUrl=""
+                            caption={"Agradecidos como siempre por toda la ayuda recibida por parte de @macfi.ch ♥️ este mes hemos podido comprar dos rascadores nuevos ya que debido a las lluvias pasadas tuvimos goteras y varios rascadores se rompieron 🥹🥹 cada granito de arena cuenta y sin vosotros no podríamos seguir ayudando cada día a nuestros gatetes! 🐱 🐈 #adoptanocompres❤️ #donar #gatosespaña"}
+                            imageUrl="/post_three.png"
                         />
+                    </div>
+                    <div className="text-center">
+                        <a
+                            href={"https://www.instagram.com/asociacionfelinosprotegidos/"}
+                            className="inline-block bg-[#805BA6] hover:bg-[#6A4A8A] text-white px-8 py-4 rounded-lg transition-all hover:scale-105 shadow-lg font-semibold text-lg"
+                        >
+                            ¡Siguenos en Instagram!
+                        </a>
                     </div>
                 </div>
             </section>

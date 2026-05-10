@@ -2,7 +2,6 @@
 import {motion} from "motion/react";
 import Image from "next/image";
 import {Calendar, CheckCircle, Edit, Euro, ExternalLink, Heart, Instagram, Package, Speech} from "lucide-react";
-import {useEffect, useRef, useState} from "react";
 
 export function CatCard({cat}: { cat: Cat }) {
     const priorityConfig = {
@@ -90,11 +89,10 @@ export function AdminCatCard({cat, onEdit}: { cat: Cat; onEdit: () => void }) {
                 />
                 <div className="absolute top-3 right-3 flex gap-2">
                     {cat.isAdopted ? (
-                        <span
-                            className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-              <CheckCircle className="w-3 h-3"/>
-              Adoptado
-            </span>
+                        <span className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                            <CheckCircle className="w-3 h-3"/>
+                            Adoptado
+                        </span>
                     ) : (
                         <span
                             className={`${priorityColors[cat.priority]} text-white text-xs font-bold px-3 py-1 rounded-full`}>
@@ -134,6 +132,47 @@ export function AdminCatCard({cat, onEdit}: { cat: Cat; onEdit: () => void }) {
         </div>
     );
 }
+
+type AirtableCat = Cat & {
+    airtableId: string;
+};
+export function AdoptedCatCard({cat, onEdit}: { cat: AirtableCat; onEdit: () => void }) {
+    return (
+        <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all">
+            <div className="p-5">
+                <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-gray-800">{cat.name}</h3>
+                    <span className="bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3"/>
+                        Adoptado
+                    </span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
+                    <span>
+                        {cat.years > 0 && `${cat.years} ${cat.years === 1 ? "año" : "años"}`}
+                        {cat.years > 0 && cat.months > 0 && " y "}
+                        {cat.months > 0 && `${cat.months} ${cat.months === 1 ? "mes" : "meses"}`}
+                        {cat.years === 0 && cat.months === 0 && "0 meses"}
+                    </span>
+                    <span>•</span>
+                    <span>{cat.sex === "macho" ? "♂️ Macho" : "♀️ Hembra"}</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-4 line-clamp-2">
+                    {cat.shortDescription}
+                </p>
+                <motion.button
+                    onClick={onEdit}
+                    whileHover={{scale: 1.02}}
+                    whileTap={{scale: 0.98}}
+                    className="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-3 rounded-xl font-semibold transition-all"
+                >
+                    Editar
+                </motion.button>
+            </div>
+        </div>
+    );
+}
+
 
 type StatCardProps = {
     icon: React.ReactNode;
@@ -306,10 +345,11 @@ export function InstagramCard({url, delay = 0, caption, imageUrl}: InstagramCard
             className="group block bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
         >
             <div className="relative aspect-square overflow-hidden bg-gray-100">
-                <img
+                <Image
                     src={imageUrl}
                     alt={caption}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    fill
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full">
@@ -317,9 +357,13 @@ export function InstagramCard({url, delay = 0, caption, imageUrl}: InstagramCard
                 </div>
             </div>
             <div className="p-4">
-                <p className="text-gray-700 line-clamp-2">{caption}</p>
+                <p className="text-gray-700 line-clamp-2">
+                    {caption}
+                </p>
                 <div className="mt-2 flex items-center gap-2 text-pink-600 group-hover:gap-3 transition-all">
-                    <span className="text-sm">Ver en Instagram</span>
+                    <span className="text-sm">
+                        Ver en Instagram
+                    </span>
                     <svg
                         className="w-4 h-4 group-hover:translate-x-1 transition-transform"
                         fill="none"

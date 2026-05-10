@@ -115,15 +115,17 @@ export async function POST(req: Request) {
             });
         }
 
-        const body = JSON.parse(rawData) as CatFields & { id?: string };
-        const {id, ...fields} = body;
+        const body = JSON.parse(rawData) as CatFields & { id?: string; removeImage?: boolean };
+        const {id, removeImage, ...fields} = body;
 
         const hasFile = file instanceof File && file.size > 0;
         const isEdit = !!id;
 
         const fieldsToSave: Record<string, unknown> = {...fields};
-
+        
         if (hasFile) {
+            fieldsToSave.images = [];
+        } else if (removeImage) {
             fieldsToSave.images = [];
         }
 
@@ -181,6 +183,49 @@ export async function POST(req: Request) {
             headers: {
                 "Content-Type": "application/json",
             },
+        });
+    }
+}
+
+export async function DELETE(req: Request) {
+    try {
+        const {searchParams} = new URL(req.url);
+        const id = searchParams.get("id");
+
+        if (!id) {
+            return new Response(JSON.stringify({error: "ID requerido"}), {
+                status: 400,
+                headers: {"Content-Type": "application/json"},
+            });
+        }
+
+        const res = await fetch(
+            `https://api.airtable.com/v0/${process.env.DATABASE_ID}/${process.env.DATABASE_TABLE_ID}/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${process.env.TOKEN_AIRTABLE}`,
+                },
+            },
+        );
+
+        if (!res.ok) {
+            return new Response(JSON.stringify({error: "Error eliminando el gato"}), {
+                status: res.status,
+                headers: {"Content-Type": "application/json"},
+            });
+        }
+
+        return new Response(JSON.stringify({deleted: true}), {
+            status: 200,
+            headers: {"Content-Type": "application/json"},
+        });
+    } catch (error) {
+        console.log(error);
+
+        return new Response(JSON.stringify({error: "Error interno"}), {
+            status: 500,
+            headers: {"Content-Type": "application/json"},
         });
     }
 }

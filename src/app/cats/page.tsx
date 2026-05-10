@@ -13,17 +13,17 @@ const CatsPage = () => {
     const [selectedPriority, setSelectedPriority] = useState<string>("todos");
 
     const fetchCats = async () => {
-        const res = await fetch("http://localhost:3000/api/cats");
+        const res = await fetch("/api/cats");
         const data = await res.json();
 
         if (!data?.records) return;
 
-        const formattedCats = data.records.map(
-            (cat: { id: string; fields: Cat }) => ({
+        const formattedCats = data.records
+            .map((cat: { id: string; fields: Cat }) => ({
                 id: cat.id,
                 ...cat.fields,
-            }),
-        );
+            }))
+            .filter((cat: Cat) => !cat.isAdopted);
 
         setCats(formattedCats);
     };

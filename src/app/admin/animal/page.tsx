@@ -4,7 +4,7 @@ import React, {Suspense, useEffect, useState} from "react";
 import type {Cat} from "@/database/catDB";
 import {useRouter, useSearchParams} from "next/navigation";
 import {motion} from "motion/react";
-import {Save, Upload} from "lucide-react";
+import {Save, Trash2, Upload, X} from "lucide-react";
 
 type AnimalForm = Omit<Cat, "id">;
 
@@ -30,7 +30,9 @@ const EditAnimal = () => {
 
     const [imagePreview, setImagePreview] = useState("");
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const [removeImage, setRemoveImage] = useState(false)
     const [isSaving, setIsSaving] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const fetchCat = async () => {
         const res = await fetch(`/api/cats?id=${id}`);
@@ -47,6 +49,7 @@ const EditAnimal = () => {
         }
 
         setImageFile(null);
+        setRemoveImage(false);
     };
 
     useEffect(() => {
@@ -64,6 +67,15 @@ const EditAnimal = () => {
 
         if (type === "checkbox") {
             const checked = (e.target as HTMLInputElement).checked;
+            
+            if (name === "isAdopted" && checked) {
+                if (imagePreview.startsWith("blob:")) {
+                    URL.revokeObjectURL(imagePreview);
+                }
+                setImagePreview("");
+                setImageFile(null);
+                setRemoveImage(true);
+            }
 
             setForm((prev) => ({
                 ...prev,
@@ -81,6 +93,27 @@ const EditAnimal = () => {
             }));
         }
     };
+    
+    const handleRemoveImage = () => {
+        if (imagePreview.startsWith("blob:")) {
+            URL.revokeObjectURL(imagePreview);
+        }
+        setImagePreview("");
+        setImageFile(null);
+        setRemoveImage(true);
+    }
+
+    const handleDelete = async () => {
+        console.log("deleting");
+        if (!id) return;
+        if (!confirm(`¿Segura que quieres eliminar a ${form.name}? Esta acción no se puede deshacer.`)) return;
+
+        router.push("/admin/dashboard");
+
+        await fetch(`/api/cats?id=${id}`, {
+            method: "DELETE",
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -90,6 +123,7 @@ const EditAnimal = () => {
         const payload = {
             ...(id && {id}),
             ...form,
+            ...(removeImage && {removeImage: true}),
         };
 
         const data = new FormData();
@@ -130,7 +164,7 @@ const EditAnimal = () => {
                     <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
                         <div className="bg-gradient-to-r from-[#805BA6] to-[#6A4A8A] px-8 py-6">
                             <h2 className="text-3xl font-bold text-white">
-                                {isNew ? "Añadir Nuevo Gato" : "Editar Gato"}
+                                {isNew ? "Añade un nuevo gato al sistema" : "Actualiza la información del gato"}
                             </h2>
 
                             <p className="text-[#E9E1F3] mt-2">
@@ -251,8 +285,8 @@ const EditAnimal = () => {
                                                     className="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#805BA6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#805BA6] after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border after:rounded-full after:h-6 after:w-6 after:transition-all"></div>
 
                                                 <span className="ms-3 text-sm font-semibold text-gray-700">
-                          Adoptado
-                        </span>
+                                                    Adoptado
+                                                </span>
                                             </label>
                                         </div>
                                     )}
@@ -260,43 +294,49 @@ const EditAnimal = () => {
                             </Section>
 
                             <Section title="Imagen">
-                                {imagePreview && (
+                                {imagePreview ? (
                                     <motion.div
                                         initial={{opacity: 0}}
                                         animate={{opacity: 1}}
-                                        className="mt-4 relative rounded-2xl overflow-hidden h-64 shadow-lg"
+                                        className="relative rounded-2xl overflow-hidden shadow-lg aspect-square"
                                     >
                                         <img
                                             src={imagePreview}
                                             alt="Preview"
                                             className="w-full h-full object-cover"
                                         />
+                                        <button
+                                            type="button"
+                                            onClick={handleRemoveImage}
+                                            className="absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition-all"
+                                        >
+                                            <X className="w-4 h-4"/>
+                                        </button>
                                     </motion.div>
-                                )}
-
-                                <div
-                                    className="flex flex-col items-center bg-[#F6F1FB] rounded-2xl p-6 border-2 border-dashed border-[#805BA6]">
-                                    <div className="text-center">
-                                        <Upload className="w-12 h-12 text-[#805BA6] mx-auto mb-3"/>
+                                ) : (
+                                    <label className="flex flex-col items-center bg-[#F6F1FB] rounded-2xl p-6 border-2 border-dashed border-[#805BA6] cursor-pointer hover:bg-[#EDE6F7] transition-colors">
+                                        <Upload className="w-12 h-12 text-[#805BA6] mb-3"/>
+                                        <span className="text-sm font-semibold text-[#805BA6]">
+                                            {imageFile ? imageFile.name : "Haz clic para subir una imagen"}
+                                        </span>
+                                        <span className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP...</span>
                                         <input
                                             type="file"
                                             accept="image/*"
+                                            className="sr-only"
                                             onChange={(e) => {
                                                 const file = e.target.files?.[0];
-
                                                 if (!file) return;
-
                                                 if (imagePreview.startsWith("blob:")) {
                                                     URL.revokeObjectURL(imagePreview);
                                                 }
-
                                                 setImageFile(file);
                                                 setImagePreview(URL.createObjectURL(file));
+                                                setRemoveImage(false);
                                             }}
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-gray-800"
                                         />
-                                    </div>
-                                </div>
+                                    </label>
+                                    )}
                             </Section>
 
                             <div className="flex gap-4 pt-6 border-t border-gray-200">
@@ -308,7 +348,29 @@ const EditAnimal = () => {
                                 >
                                     Cancelar
                                 </motion.a>
-
+                                {!isNew && (
+                                    <motion.button
+                                        type="button"
+                                        onClick={handleDelete}
+                                        disabled={isDeleting}
+                                        whileHover={{scale: 1.02}}
+                                        whileTap={{scale: 0.98}}
+                                        className="flex-1 bg-red-500 hover:bg-red-600 text-white px-6 py-4 rounded-xl font-semibold shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+                                    >
+                                        {isDeleting ? (
+                                            <>
+                                                <div
+                                                    className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"/>
+                                                Eliminando...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Trash2 className="w-5 h-5"/>
+                                                Eliminar Gato
+                                            </>
+                                        )}
+                                    </motion.button>
+                                )}
                                 <motion.button
                                     type="submit"
                                     disabled={isSaving}
