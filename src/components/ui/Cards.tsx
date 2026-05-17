@@ -210,11 +210,13 @@ type DonationCardProps = {
     title: string;
     description: string;
     action: string;
+    extraAction?: string;
     link?: string;
     onClick?: () => void;
+    onExtraClick?: () => void;
 };
 
-export function DonationCard({type, title, description, action, link, onClick}: DonationCardProps) {
+export function DonationCard({type, title, description, action, extraAction, link, onClick, onExtraClick}: DonationCardProps) {
     const icons = {
         bizum: <Heart className="w-8 h-8 text-[#805BA6]"/>,
         teaming: <Euro className="w-8 h-8 text-[#805BA6]"/>,
@@ -225,7 +227,6 @@ export function DonationCard({type, title, description, action, link, onClick}: 
     const content = (
         <motion.div
             whileHover={{scale: isClickable ? 1.03 : 1, y: isClickable ? -4 : 0}}
-            onClick={onClick}
             className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all 
             ${isClickable ? 'cursor-pointer' : ''} 
             ${type === 'material' ? 'md:col-span-2' : ''}`}
@@ -236,13 +237,43 @@ export function DonationCard({type, title, description, action, link, onClick}: 
                     {icons[type]}
                 </div>
                 <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-                    <p className="text-gray-600 mb-4">{description}</p>
-                    <div className="flex items-center gap-2 text-[#805BA6] font-semibold">
-                        <span>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                        {title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                        {description}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 text-[#805BA6] font-semibold">
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onClick?.();
+                            }}
+                            className="hover:underline"
+                        >
                             {action}
-                        </span>
-                        {(link || onClick) && <ExternalLink className="w-4 h-4"/>}
+                        </button>
+
+                        {extraAction && (
+                            <>
+                                <span>•</span>
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onExtraClick?.();
+                                    }}
+                                    className="hover:underline break-all text-left"
+                                >
+                                    {extraAction}
+                                </button>
+                            </>
+                        )}
+
+                        {(link || onClick) && (
+                            <ExternalLink className="w-4 h-4 flex-shrink-0" />
+                        )}
                     </div>
                 </div>
             </div>

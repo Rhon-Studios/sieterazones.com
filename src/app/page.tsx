@@ -27,29 +27,84 @@ export default function Home() {
     useEffect(() => {
         fetchCats();
     }, []);
+    
     const priorityOrder = {urgente: 0, alta: 1, normal: 2};
     const featuredCats = cats
         .filter((cat) => !cat.isAdopted)
         .filter((cat) => cat.status === "normal")
         .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
         .slice(0, 3);
-    const handleShare = async () => {
-        const url = "https://sieterazones.vercel.app/";
+
+    const bizumNumber = "13843";
+    const iban = "ES1730670041263711292114";
+
+    const handleCopyOrShare = async (
+        label: string,
+        value: string,
+        title?: string,
+        text?: string
+    ) => {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: "Asociación Felinos Protegidos",
-                    text: "Ayuda a esta asociación de gatos 🐱",
-                    url,
+                    title: title || label,
+                    text: text || value,
                 });
+
+                return;
             } catch (error) {
                 console.log(error);
             }
-        } else {
-            await navigator.clipboard.writeText(url);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
         }
+        try {
+            await navigator.clipboard.writeText(value);
+
+            setCopied(label);
+
+            setTimeout(() => {
+                setCopied("");
+            }, 2000);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const copyToClipboard = async (text: string, label: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            alert(`${label} copiado`);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleBizum = async () => {
+        await handleCopyOrShare(
+            "Bizum",
+            bizumNumber,
+            "Bizum Asociación",
+            `Número de Bizum: ${bizumNumber}`
+        );
+    };
+
+    const handleIban = async () => {
+        await handleCopyOrShare(
+            "IBAN",
+            iban,
+            "Transferencia bancaria",
+            `IBAN: ${iban}`
+        );
+    };
+
+    const handleShare = async () => {
+        const url = "https://sieterazones.vercel.app/";
+
+        await handleCopyOrShare(
+            "Web",
+            url,
+            "Asociación Felinos Protegidos",
+            `Ayuda a esta asociación de gatos 🐱 ${url}`
+        );
     };
         
     return (
@@ -232,7 +287,7 @@ export default function Home() {
                             whileInView={{opacity: 1, x: 0}}
                             viewport={{once: true}}
                             transition={{duration: 0.6}}
-                            className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+                            className="relative w-full aspect-square md:aspect-auto md:h-[600px] rounded-3xl overflow-hidden shadow-2xl max-w-sm md:max-w-none mx-auto"
                         >
                             <div>
                                 <div className="bg-white rounded-2xl overflow-hidden shadow-xl mb-6">
@@ -319,9 +374,12 @@ export default function Home() {
                         >
                             <DonationCard
                                 type="bizum"
-                                title="Bizum"
-                                description="Donación rápida y segura"
-                                action="+34 664 43 50 87"
+                                title="Bizum y Transferencia"
+                                description="Ayúdanos con una donación rápida y segura"
+                                action="Bizum: 13843"
+                                extraAction="IBAN: ES1730670041263711292114"
+                                onClick={handleBizum}
+                                onExtraClick={handleIban}
                             />
                         </motion.div>
                         <motion.div
@@ -428,8 +486,8 @@ export default function Home() {
                             className="bg-white border border-gray-200 shadow-xl rounded-xl px-6 py-3 flex items-center gap-3">
                             <span className="text-green-600 text-lg">✔</span>
                             <span className="text-gray-800 font-medium">
-                Enlace copiado al portapapeles
-              </span>
+                                Enlace copiado al portapapeles
+                            </span>
                         </div>
                     </motion.div>
                 )}
