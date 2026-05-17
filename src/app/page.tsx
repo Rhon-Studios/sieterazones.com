@@ -10,7 +10,7 @@ import {Cat} from "@/database/catDB";
 export default function Home() {
     const router = useRouter();
     const [cats, setCats] = useState<Cat[]>([]);
-    const [copied, setCopied] = useState(false);
+    const [copied, setCopied] = useState<string>("");
         
     const fetchCats = async () => {
         const res = await fetch("/api/cats");
